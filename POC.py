@@ -27,11 +27,13 @@ if __name__ == "__main__":
         highest_temp = blackHoleTemperatureInSolarMass(smallest_mass)
         mCMB = massFromTemperature(2.7)/MS
         m46963 = massFromLambda(46963)
+        mGreen = massFromLambda(525e-09)
         print "=== DEBUG "
         print "5000K Peak at:             " + str(planckPeak(wavNM, intensity5000)*1e+9) +  " nm"
         print "1K Peak at:                " + str(planckPeak(wavMM, intensity1)*1e+3) +  " mm"
         print "Mass of t=2.7K m: " + str(mCMB) + " Solar Masses"
-        print "Mass of wavelen = 46963 m: " + str(m46963) + " Solar Masses"
+        print "Mass of green wavelen: " + str(mGreen) + " Solar Masses"
+        print "Mass of wavelen = 46963: " + str(m46963) + " Solar Masses"
         print "========= \n"
 
     if args.plot:
@@ -55,6 +57,8 @@ if __name__ == "__main__":
         printBHInfo(schwarzschildMass(lP)/MS, args.plot)
         print ">Primordial black hole"
         printBHInfo(1e-19, args.plot)
+        print ">\"Green\" black hole"
+        printBHInfo(mGreen, args.plot)
         print ">5K black hole"
         printBHInfo(massFromTemperature(5)/MS, args.plot)
         print ">Moon mass black hole"

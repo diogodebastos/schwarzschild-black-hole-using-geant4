@@ -96,5 +96,11 @@ def printBHInfo(M, plot=False):
         plt.xlabel('$\lambda$ (m)')
         plt.ylabel('Spectral Radiance (sr$^{-1}$.m$^{-2}$.nm$^{-1}$)')
         plt.title('Planck\'s law')
-        plt.plot(wav, intensity)
+        if maxLambda_pred > 700e-9:
+            color = '-r'
+        elif maxLambda_pred < 390e-9:
+            color = '-b'
+        else:
+            color = '-g'
+        plt.plot(wav, intensity, color)
         plt.show()
