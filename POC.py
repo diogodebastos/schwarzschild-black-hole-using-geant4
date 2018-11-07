@@ -37,7 +37,7 @@ if __name__ == "__main__":
     if args.plot:
         startM = 1e-10
         endM = 1e-5
-        stepM = (endM-startM)/(3e6-1)
+        stepM = (endM-startM)/(3e3-1)
         BHmasses = np.arange(startM,endM, stepM)
         
         print "=== PLOT "

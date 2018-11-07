@@ -98,7 +98,7 @@ def printBHInfo(M, plot=False, norm=False):
         plt.ylabel('Spectral Radiance (sr$^{-1}$.m$^{-2}$.nm$^{-1}$)')
         plt.title('Planck\'s law')
         if norm:
-            plt.ylabel('Normalize to 1 Spectral Radiance')
+            plt.ylabel('Normalized to 1 Spectral Radiance')
         else:
             ymax=1
         if maxLambda_pred > 700e-9:
@@ -107,7 +107,8 @@ def printBHInfo(M, plot=False, norm=False):
             color = '-b'
         else:
             color = '-g'
-        plt.plot(wav, intensity/ymax, color)
+        plt.plot(wav, intensity/ymax, color, label=str(M))
+        plt.legend()
         if not norm:
-            plt.grid() 
+            plt.grid()
             plt.show()
