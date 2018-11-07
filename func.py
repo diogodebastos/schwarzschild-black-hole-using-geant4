@@ -83,7 +83,7 @@ def printBHInfo(M, plot=False):
     power = SBSHPow(M)
     tEV = secondsToYears(evaporationTime(schwarzschildVolume(radius)))
     
-    print "\nBH " + str(M) + " solar mass:" 
+    print "Mass:             " + str(M) + " solar mass" 
     print "Temperature:      " + str(temperature) + " K" 
     print "Planck peak:      " + str(maxLambda_calc) +  " m"
     print "Max lambda:       " + str(maxLambda_pred) +  " m"
@@ -91,6 +91,7 @@ def printBHInfo(M, plot=False):
     print "Evaporation time: " + str(tEV) + " years"
     print "lambda/radius:    " + str(ratio)
     print "Radiated power:   " + str(power) + " W.kg².M⁻²"
+    print ""
     if plot:
         plt.xlabel('$\lambda$ (m)')
         plt.ylabel('Spectral Radiance (sr$^{-1}$.m$^{-2}$.nm$^{-1}$)')
