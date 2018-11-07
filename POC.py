@@ -1,8 +1,5 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
-import matplotlib.pyplot as plt
-import numpy as np
-from bigfloat import *
 from const import *
 from func import *
 
@@ -11,6 +8,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process the command line options')
     parser.add_argument('-d', '--debug', action='store_true', help='Enter debug mode')
     parser.add_argument('-p', '--plot', action='store_true', help='Do plots')
+    parser.add_argument('-n', '--normalize', action='store_true', help='Normalize Planck law plot to peak at 1')
     parser.add_argument('-v', '--verbose', action='store_true', help='Whether to print verbose output')
 
     args = parser.parse_args()
@@ -50,25 +48,32 @@ if __name__ == "__main__":
         plt.xscale('log')
         plt.yscale('log')
         plt.plot(BHmasses,blackHoleTemperatureInSolarMass(BHmasses))
+        plt.grid()
         plt.show()
     
     if args.debug:
+        doNorm=args.normalize
         print ">Planck lenght black hole"
-        printBHInfo(schwarzschildMass(lP)/MS, args.plot)
+        printBHInfo(schwarzschildMass(lP)/MS, args.plot, norm=doNorm)
         print ">Primordial black hole"
-        printBHInfo(1e-19, args.plot)
+        printBHInfo(1e-19, args.plot, norm=doNorm)
         print ">\"Green\" black hole"
-        printBHInfo(mGreen, args.plot)
+        printBHInfo(mGreen, args.plot, norm=doNorm)
         print ">5K black hole"
-        printBHInfo(massFromTemperature(5)/MS, args.plot)
+        printBHInfo(massFromTemperature(5)/MS, args.plot, norm=doNorm)
         print ">Moon mass black hole"
-        printBHInfo(3.69e-8, args.plot)
-        #printBHInfo(1e-6, args.plot)
+        printBHInfo(3.69e-8, args.plot, norm=doNorm)
+        #printBHInfo(1e-6, args.plot, norm=doNorm)
         print ">1 Solar mass black hole" 
-        printBHInfo(1, args.plot)
-        #printBHInfo(1e+6, args.plot)
+        printBHInfo(1, args.plot, norm=doNorm)
+        #printBHInfo(1e+6, args.plot, norm=doNorm)
         print ">Milky way's black hole"
         # https://en.wikipedia.org/wiki/Supermassive_black_hole#In_the_Milky_Way
-        printBHInfo(4.1e+6, args.plot)
+        printBHInfo(4.1e+6, args.plot, norm=doNorm)
         print ">Supermassive black hole"
-        printBHInfo(1e+11, args.plot)
+        printBHInfo(1e+11, args.plot, norm=doNorm)
+        plt.xscale('log')
+        if doNorm:
+            plt.xscale('log')
+            plt.grid()
+            plt.show()

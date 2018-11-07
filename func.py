@@ -69,15 +69,16 @@ def SBSHPow(M):
     power = (hbar*c**6)/(15360*np.pi*G**2*(M*MS)**2)
     return power
 
-def printBHInfo(M, plot=False):
+def printBHInfo(M, plot=False, norm=False):
     start = 1e-2*M
     end = 1e+6*M
-    step = (end-start)/(3e6-1)
+    step = (end-start)/(3e4-1)
     wav = np.arange(start, end, step)
     temperature = blackHoleTemperatureInSolarMass(M)
     intensity = plancksLaw(wav, temperature)
     maxLambda_calc = planckPeak(wav, intensity)
     maxLambda_pred = predictedLambdaMax(temperature)
+    ymax = max(intensity)
     radius = schwarzschildRadius(M*MS)
     ratio = maxLambda_calc/radius
     power = SBSHPow(M)
@@ -96,11 +97,17 @@ def printBHInfo(M, plot=False):
         plt.xlabel('$\lambda$ (m)')
         plt.ylabel('Spectral Radiance (sr$^{-1}$.m$^{-2}$.nm$^{-1}$)')
         plt.title('Planck\'s law')
+        if norm:
+            plt.ylabel('Normalize to 1 Spectral Radiance')
+        else:
+            ymax=1
         if maxLambda_pred > 700e-9:
             color = '-r'
         elif maxLambda_pred < 390e-9:
             color = '-b'
         else:
             color = '-g'
-        plt.plot(wav, intensity, color)
-        plt.show()
+        plt.plot(wav, intensity/ymax, color)
+        if not norm:
+            plt.grid() 
+            plt.show()
